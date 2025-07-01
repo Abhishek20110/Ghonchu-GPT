@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://ghonchu-gpt.vercel.app
+
+# Sitemaps
+Sitemap: https://ghonchu-gpt.vercel.app/sitemap.xml
