@@ -1,19 +1,24 @@
 import { getAuthToken } from '@/lib/auth';
 // Mock app data and API functions
 export interface App {
-  id: string;
+  _id: string;
   name: string;
-  user_id: string;
-  app_key: string;
-  app_secret: string;
+  appkey: string;
+  appsecret: string;
   is_active: boolean;
-  is_del: boolean;
   is_admin_approved: boolean;
   enable_generation: boolean;
   enable_rewrite: boolean;
   enable_translate: boolean;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
+  is_del: boolean;
+  userId: {
+    _id: string;
+    name: string;
+    email: string;
+  };
+  __v: number;
 }
 
 // Mock data

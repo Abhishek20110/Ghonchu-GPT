@@ -25,7 +25,16 @@ interface App {
   enable_rewrite: boolean;
   enable_translate: boolean;
   createdAt: string;
+  updatedAt: string;
+  is_del: boolean;
+  userId: {
+    _id: string;
+    name: string;
+    email: string;
+  };
+  __v: number;
 }
+
 
 interface AppTableProps {
   apps: App[];
