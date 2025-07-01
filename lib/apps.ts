@@ -21,63 +21,31 @@ export interface App {
   __v: number;
 }
 
-// Mock data
-const mockApps: App[] = [
+
+export const mockApps: App[] = [
   {
-    id: 'app_1',
-    name: 'My First App',
-    user_id: 'user_123',
-    app_key: 'ghonchu_abc123def456',
-    app_secret: 'sk_secret123456789',
+    _id: '1',
+    name: 'Ghonchu AI',
+    appkey: 'ghonchu-ai-key',
+    appsecret: 'ghonchu-ai-secret',
     is_active: true,
-    is_del: false,
-    is_admin_approved: true,
-    enable_generation: true,
-    enable_rewrite: false,
-    enable_translate: true,
-    created_at: '2024-01-15T10:30:00Z',
-    updated_at: '2024-01-15T10:30:00Z'
-  },
-  {
-    id: 'app_2',
-    name: 'Translation Bot',
-    user_id: 'user_123',
-    app_key: 'ghonchu_xyz789ghi012',
-    app_secret: 'sk_secret987654321',
-    is_active: false,
-    is_del: false,
-    is_admin_approved: false,
-    enable_generation: false,
-    enable_rewrite: true,
-    enable_translate: true,
-    created_at: '2024-01-20T14:15:00Z',
-    updated_at: '2024-01-20T14:15:00Z'
-  },
-  {
-    id: 'app_3',
-    name: 'Content Generator',
-    user_id: 'user_123',
-    app_key: 'ghonchu_mno345pqr678',
-    app_secret: 'sk_secret555666777',
-    is_active: true,
-    is_del: false,
     is_admin_approved: true,
     enable_generation: true,
     enable_rewrite: true,
-    enable_translate: false,
-    created_at: '2024-01-25T09:45:00Z',
-    updated_at: '2024-01-25T09:45:00Z'
-  }
+    enable_translate: true,
+    createdAt: '2023-10-01T12:00:00Z',
+    updatedAt: '2023-10-01T12:00:00Z',
+    is_del: false,
+    userId: {
+      _id: 'user1',
+      name: 'John Doe',
+      email: 'IhIgM@example.com',
+    },
+    __v: 0,
+  },
 ];
 
-// Generate unique app key and secret
-const generateAppKey = () => {
-  return 'ghonchu_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-};
 
-const generateAppSecret = () => {
-  return 'sk_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-};
 
 interface CreateAppPayload {
   name: string;
@@ -145,7 +113,7 @@ export const updateAppStatus = async (appId: string, isActive: boolean) => {
   // Simulate API call delay
   await new Promise(resolve => setTimeout(resolve, 500));
 
-  const appIndex = mockApps.findIndex(app => app.id === appId);
+  const appIndex = mockApps.findIndex(app => app._id === appId);
   if (appIndex === -1) {
     return { data: null, error: { message: 'App not found' } };
   }
@@ -153,7 +121,7 @@ export const updateAppStatus = async (appId: string, isActive: boolean) => {
   mockApps[appIndex] = {
     ...mockApps[appIndex],
     is_active: isActive,
-    updated_at: new Date().toISOString()
+    updatedAt: new Date().toISOString()
   };
 
   return { data: mockApps[appIndex], error: null };
@@ -163,7 +131,7 @@ export const deleteApp = async (appId: string) => {
   // Simulate API call delay
   await new Promise(resolve => setTimeout(resolve, 500));
 
-  const appIndex = mockApps.findIndex(app => app.id === appId);
+  const appIndex = mockApps.findIndex(app => app._id === appId);
   if (appIndex === -1) {
     return { data: null, error: { message: 'App not found' } };
   }
@@ -172,7 +140,7 @@ export const deleteApp = async (appId: string) => {
   mockApps[appIndex] = {
     ...mockApps[appIndex],
     is_del: true,
-    updated_at: new Date().toISOString()
+    updatedAt: new Date().toISOString()
   };
 
   return { data: mockApps[appIndex], error: null };
