@@ -47,6 +47,17 @@ export default function RootLayout({
         <meta name="google-site-verification" content="RqYi4DCt2l34hrw1-RiusGqRkRNEswFtr1YFEiONMlM" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://ghonchu-gpt.vercel.app/" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Ghonchu GPT",
+              "url": "https://ghonchu-gpt.vercel.app",
+            }),
+          }}
+        />
       </head>
       <body className={inter.className}>
         <Navigation />
