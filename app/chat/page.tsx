@@ -51,7 +51,7 @@ export default function ChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSendMessage = async () => {
+  const handleSendMessagemorebot = async () => {
     if (!inputValue.trim() || isLoading) return;
 
     const userMessage: Message = {
@@ -252,6 +252,98 @@ export default function ChatPage() {
       }
     }
   };
+
+  const handleSendMessage = async () => {
+  if (!inputValue.trim() || isLoading) return;
+
+  const userMessage: Message = {
+    id: Date.now().toString(),
+    content: inputValue,
+    isBot: false,
+    timestamp: new Date(),
+  };
+
+  setMessages((prev) => [...prev, userMessage]);
+  setInputValue('');
+  setIsLoading(true);
+
+  const botResponseText = [
+    "Woof! That's such an interesting question! 🐕 Let me think about that with my golden brain... *tail wagging*",
+  ];
+
+  const showFakeBotMessage = () => {
+    const botThinkingMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      content: botResponseText[Math.floor(Math.random() * botResponseText.length)],
+      isBot: true,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, botThinkingMessage]);
+  };
+
+  const sendApiRequest = async (retry = false) => {
+    try {
+      const endpoint = isTranslate ? "translate" : "generate";
+      const payload = isTranslate
+        ? {
+            text: inputValue,
+            baselanguage: fromLang,
+            targetlanguage: toLang,
+          }
+        : { prompt: inputValue };
+
+      const response = await axios.post(`${apiUrl}/api/ai/admin/${endpoint}`, payload);
+
+      if (response.status !== 200 && !retry) {
+        console.warn("First request failed, retrying once...");
+        return sendApiRequest(true); // Retry once
+      }
+
+      const finalText =
+        response.status === 200 && response.data?.success && response.data?.response
+          ? isTranslate
+            ? `Translation: ${response.data.response}`
+            : `${response.data.response}`
+          : "🐾 Unable to process the request. Please try again.";
+
+      setTimeout(() => {
+        const finalMessage: Message = {
+          id: (Date.now() + 2).toString(),
+          content: finalText,
+          isBot: true,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, finalMessage]);
+        setIsLoading(false);
+      }, 1000); // After fake response
+    } catch (err) {
+      console.error("AI API error:", err);
+      const fallbackMessage: Message = {
+        id: (Date.now() + 3).toString(),
+        content: retry
+          ? "🐾 Unable to process the request. Please try again."
+          : "🐾 Something went wrong. Retrying once...",
+        isBot: true,
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, fallbackMessage]);
+
+      if (!retry) {
+        // Retry once
+        return sendApiRequest(true);
+      } else {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  // 1. Send request
+  await sendApiRequest();
+
+  // 2. Show bot fake response immediately
+  showFakeBotMessage();
+};
+
 
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
