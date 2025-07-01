@@ -179,7 +179,7 @@ export default function ChatPage() {
       try {
         setTimeout(async () => {
           const response = await axios.post(`${apiUrl}/api/ai/admin/translate`, {
-            test: inputValue,
+            text: inputValue,
             baselanguage: fromLang,
             targetlanguage: toLang,
           });
