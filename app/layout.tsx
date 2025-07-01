@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import { Toaster } from 'sonner';
+import { Analytics } from '@vercel/analytics/next';
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -63,6 +64,7 @@ export default function RootLayout({
         <Navigation />
         <main className="pt-16 min-h-screen">
           {children}
+          <Analytics />
         </main>
         <Footer />
         <Toaster
