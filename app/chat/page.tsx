@@ -254,95 +254,95 @@ export default function ChatPage() {
   };
 
   const handleSendMessage = async () => {
-  if (!inputValue.trim() || isLoading) return;
+    if (!inputValue.trim() || isLoading) return;
 
-  const userMessage: Message = {
-    id: Date.now().toString(),
-    content: inputValue,
-    isBot: false,
-    timestamp: new Date(),
-  };
-
-  setMessages((prev) => [...prev, userMessage]);
-  setInputValue('');
-  setIsLoading(true);
-
-  const botResponseText = [
-    "Woof! That's such an interesting question! 🐕 Let me think about that with my golden brain... *tail wagging*",
-  ];
-
-  const showFakeBotMessage = () => {
-    const botThinkingMessage: Message = {
-      id: (Date.now() + 1).toString(),
-      content: botResponseText[Math.floor(Math.random() * botResponseText.length)],
-      isBot: true,
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content: inputValue,
+      isBot: false,
       timestamp: new Date(),
     };
-    setMessages((prev) => [...prev, botThinkingMessage]);
-  };
 
-  const sendApiRequest = async (retry = false) => {
-    try {
-      const endpoint = isTranslate ? "translate" : "generate";
-      const payload = isTranslate
-        ? {
+    setMessages((prev) => [...prev, userMessage]);
+    setInputValue('');
+    setIsLoading(true);
+
+    const botResponseText = [
+      "Woof! That's such an interesting question! 🐕 Let me think about that with my golden brain... *tail wagging*",
+    ];
+
+    const showFakeBotMessage = () => {
+      const botThinkingMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: botResponseText[Math.floor(Math.random() * botResponseText.length)],
+        isBot: true,
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, botThinkingMessage]);
+    };
+
+    const sendApiRequest = async (retry = false): Promise<void> => {
+      try {
+        const endpoint = isTranslate ? "translate" : "generate";
+        const payload = isTranslate
+          ? {
             text: inputValue,
             baselanguage: fromLang,
             targetlanguage: toLang,
           }
-        : { prompt: inputValue };
+          : { prompt: inputValue };
 
-      const response = await axios.post(`${apiUrl}/api/ai/admin/${endpoint}`, payload);
+        const response = await axios.post(`${apiUrl}/api/ai/admin/${endpoint}`, payload);
 
-      if (response.status !== 200 && !retry) {
-        console.warn("First request failed, retrying once...");
-        return sendApiRequest(true); // Retry once
-      }
+        if (response.status !== 200 && !retry) {
+          console.warn("First request failed, retrying once...");
+          return sendApiRequest(true); // Retry once
+        }
 
-      const finalText =
-        response.status === 200 && response.data?.success && response.data?.response
-          ? isTranslate
-            ? `Translation: ${response.data.response}`
-            : `${response.data.response}`
-          : "🐾 Unable to process the request. Please try again.";
+        const finalText =
+          response.status === 200 && response.data?.success && response.data?.response
+            ? isTranslate
+              ? `Translation: ${response.data.response}`
+              : `${response.data.response}`
+            : "🐾 Unable to process the request. Please try again.";
 
-      setTimeout(() => {
-        const finalMessage: Message = {
-          id: (Date.now() + 2).toString(),
-          content: finalText,
+        setTimeout(() => {
+          const finalMessage: Message = {
+            id: (Date.now() + 2).toString(),
+            content: finalText,
+            isBot: true,
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, finalMessage]);
+          setIsLoading(false);
+        }, 1000); // Simulate delay for bot response
+      } catch (err) {
+        console.error("AI API error:", err);
+        const fallbackMessage: Message = {
+          id: (Date.now() + 3).toString(),
+          content: retry
+            ? "🐾 Unable to process the request. Please try again."
+            : "🐾 Something went wrong. Retrying once...",
           isBot: true,
           timestamp: new Date(),
         };
-        setMessages((prev) => [...prev, finalMessage]);
-        setIsLoading(false);
-      }, 1000); // After fake response
-    } catch (err) {
-      console.error("AI API error:", err);
-      const fallbackMessage: Message = {
-        id: (Date.now() + 3).toString(),
-        content: retry
-          ? "🐾 Unable to process the request. Please try again."
-          : "🐾 Something went wrong. Retrying once...",
-        isBot: true,
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, fallbackMessage]);
+        setMessages((prev) => [...prev, fallbackMessage]);
 
-      if (!retry) {
-        // Retry once
-        return sendApiRequest(true);
-      } else {
-        setIsLoading(false);
+        if (!retry) {
+          return sendApiRequest(true); // Retry once
+        } else {
+          setIsLoading(false);
+        }
       }
-    }
+    };
+
+    // 1. Show bot fake response immediately
+    showFakeBotMessage();
+
+    // 2. Send request to backend
+    await sendApiRequest();
   };
 
-  // 1. Send request
-  await sendApiRequest();
-
-  // 2. Show bot fake response immediately
-  showFakeBotMessage();
-};
 
 
 
@@ -369,8 +369,8 @@ export default function ChatPage() {
               >
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${message.isBot
-                      ? 'bg-gradient-to-r from-amber-600 to-orange-600 golden-glow'
-                      : 'bg-gradient-to-r from-orange-600 to-amber-600'
+                    ? 'bg-gradient-to-r from-amber-600 to-orange-600 golden-glow'
+                    : 'bg-gradient-to-r from-orange-600 to-amber-600'
                     }`}
                 >
                   {message.isBot ? (
@@ -382,8 +382,8 @@ export default function ChatPage() {
 
                 <div
                   className={`glass-card p-4 ${message.isBot
-                      ? 'bg-amber-100/10 border-amber-200/20'
-                      : 'bg-gradient-to-r from-amber-600/20 to-orange-600/20 border-amber-500/30'
+                    ? 'bg-amber-100/10 border-amber-200/20'
+                    : 'bg-gradient-to-r from-amber-600/20 to-orange-600/20 border-amber-500/30'
                     }`}
                 >
                   {message.isBot ? (
