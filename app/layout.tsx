@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Ghonchu GPT – Your AI Assistant 🐾',
   description: 'Ghonchu GPT is your playful AI chatbot assistant for smart, witty, and helpful conversations. Ask Ghonchu anything!',
-  keywords: ['Ghonchu GPT', 'AI chatbot', 'funny assistant', 'Ghonchu AI', 'GPT dog bot', 'chat with Ghonchu'],
+  keywords: ['Ghonchu GPT', 'AI chatbot', 'funny assistant', 'Ghonchu AI', 'GPT dog bot', 'chat with Ghonchu', 'Ghonchu' , 'gochu gpt' , 'free api', 'chat gpt' , 'AI' , 'new ai' , 'fun ai' , 'dog gpt' ],
   openGraph: {
     title: 'Ghonchu GPT – Your AI Assistant 🐾',
     description: 'Ghonchu GPT is your playful AI chatbot assistant for smart, witty, and helpful conversations.',
