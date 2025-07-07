@@ -81,7 +81,8 @@ export default function RootLayout({
         <meta name="geo.region" content="IN" />
         <meta name="geo.placename" content="India" />
         <link rel="canonical" href="https://ghonchu-gpt.vercel.app/" />
-        <link rel="alternate" hreflang="en-in" href="https://ghonchu-gpt.vercel.app/" />
+      <link rel="alternate" hrefLang="en-in" href="https://ghonchu-gpt.vercel.app/" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
