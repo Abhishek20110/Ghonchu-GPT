@@ -7,91 +7,46 @@ import { Toaster } from 'sonner';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Ghonchu GPT – Your AI Assistant 🐾',
-  description: 'Ghonchu GPT is your playful AI chatbot assistant for smart, witty, and helpful conversations. Ask Ghonchu anything!',
+  title: 'Ghonchu GPT – Talk to a Fun AI Dog 🐶',
+  description:
+    'Ghonchu GPT is your witty, pet-inspired AI chatbot assistant. Built in India, powered by GPT, and filled with playful personality. Ask Ghonchu anything!',
   keywords: [
-  'Ghonchu GPT',
-  'AI chatbot',
-  'funny assistant',
-  'Ghonchu AI',
-  'GPT dog bot',
-  'chat with Ghonchu',
-  'Ghonchu',
-  'gochu gpt',
-  'free api',
-  'chat gpt',
-  'AI',
-  'new ai',
-  'fun ai',
-  'dog gpt',
-  'Ghonchu Bot',
-  'GPT-powered assistant',
-  'pet-themed AI',
-  'talking dog AI',
-  'golden retriever bot',
-  'witty GPT chatbot',
-  'cute AI chatbot',
-  'AI dog companion',
-  'AI with personality',
-  'Ghonchu assistant',
-  'Ghonchu the dog',
-  'dog chatbot',
-  'GPT chat buddy',
-  'hilarious GPT bot',
-  'chatbot API',
-  'fun GPT responses',
-  'chatbot with paw',
-  'chatbot for websites',
-  'AI dog',
-  'dog voice chatbot',
-  'talk to GPT',
-  'GPT for fun',
-  'chatbot for fun',
-  'talking pet AI',
-  'AI with emotions',
-  'lighthearted chatbot',
-  'developer API GPT',
-  'fun AI tool',
-  'free GPT chat',
-  'chatbot friend',
-  'AI pet bot',
-  'dog GPT API',
-  'best free AI chatbot',
-  'funny chat gpt bot',
-  'gpt chatbot online',
-  'chatbot that jokes',
-  'talk to a dog bot',
-  'gpt chatbot for fun',
-  'free chat gpt website',
-  'ai bot with personality',
-  'dog themed ai assistant',
-  'cute ai assistant',
-  'friendly ai chatbot',
-  'chatbot like gpt',
-  'best chatbot to talk to',
-  'interactive ai bot',
-  'realistic ai chat',
-  'ai dog friend',
-  'chat with funny ai',
-  'ask ai questions free',
-  'ai talking dog online',
-  'dog ai chat',
-  'doggpt',
-  'ghonchu gpt free chat',
-  'fun ai chatbot online',
-  'ai dog jokes',
-  'ai dog assistant gpt' ,
-  'chat gpt pro free' ,
-  'AI by Abhishek Dey' ,
-  'Indian AI',
-],
+    'Ghonchu GPT',
+    'AI chatbot India',
+    'funny GPT assistant',
+    'golden retriever AI',
+    'talk to AI dog',
+    'chatbot with personality',
+    'Indian AI project',
+    'free chatbot India',
+    'talking dog AI',
+    'Ghonchu AI bot',
+    'GPT dog companion',
+    'cute chatbot free',
+    'fun AI assistant',
+    'doggpt',
+    'GPT for fun',
+    'pet themed AI',
+    'interactive dog chatbot',
+    'AI by Abhishek Dey',
+    'dog GPT bot',
+    'virtual pet chatbot',
+    'GPT bot India',
+    'chatbot for pet lovers',
+    'friendly GPT chat',
+    'AI dog jokes',
+    'chat with golden retriever AI',
+    'dog assistant GPT',
+    'free chat gpt website',
+    'Made in India AI',
+  ],
   openGraph: {
-    title: 'Ghonchu GPT – Your AI Assistant 🐾',
-    description: 'Ghonchu GPT is your playful AI chatbot assistant for smart, witty, and helpful conversations.',
+    title: 'Ghonchu GPT – Talk to a Fun AI Dog 🐶',
+    description:
+      'Chat with Ghonchu – your golden retriever-inspired AI chatbot. Smart, witty, and always ready to talk. Try it free!',
     url: 'https://ghonchu-gpt.vercel.app',
     siteName: 'Ghonchu GPT',
     type: 'website',
@@ -100,18 +55,17 @@ export const metadata: Metadata = {
         url: 'https://ghonchu-gpt.vercel.app/ghonchu-preview.png',
         width: 1200,
         height: 630,
-        alt: 'Ghonchu GPT',
+        alt: 'Ghonchu GPT AI Chatbot Preview',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ghonchu GPT – Your AI Assistant 🐾',
-    description: 'Chat with Ghonchu, your golden retriever-powered AI chatbot!',
+    title: 'Ghonchu GPT – Talk to a Fun AI Dog 🐶',
+    description: 'Chat with Ghonchu – your witty golden retriever-powered AI chatbot, made in India by Abhishek Dey.',
     images: ['https://ghonchu-gpt.vercel.app/ghonchu-preview.png'],
   },
 };
-
 
 export default function RootLayout({
   children,
@@ -121,17 +75,35 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-site-verification" content="RqYi4DCt2l34hrw1-RiusGqRkRNEswFtr1YFEiONMlM" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-site-verification" content="RqYi4DCt2l34hrw1-RiusGqRkRNEswFtr1YFEiONMlM" />
+        <meta name="language" content="en-IN" />
+        <meta name="geo.region" content="IN" />
+        <meta name="geo.placename" content="India" />
         <link rel="canonical" href="https://ghonchu-gpt.vercel.app/" />
+        <link rel="alternate" hreflang="en-in" href="https://ghonchu-gpt.vercel.app/" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Ghonchu GPT",
-              "url": "https://ghonchu-gpt.vercel.app",
+              "@type": "SoftwareApplication",
+              name: "Ghonchu GPT",
+              url: "https://ghonchu-gpt.vercel.app",
+              applicationCategory: "Chatbot",
+              operatingSystem: "All",
+              description:
+                "Ghonchu GPT is an interactive, dog-inspired AI chatbot assistant developed by Indian developer Abhishek Dey. Talk to Ghonchu for fun and helpful conversations.",
+              creator: {
+                "@type": "Person",
+                name: "Abhishek Dey",
+                nationality: "Indian",
+              },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://ghonchu-gpt.vercel.app/?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
             }),
           }}
         />
