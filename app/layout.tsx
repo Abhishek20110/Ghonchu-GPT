@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     'dog assistant GPT',
     'free chat gpt website',
     'Made in India AI',
+    'Abhishek Dey'
   ],
   openGraph: {
     title: 'Ghonchu GPT – Talk to a Fun AI Dog 🐶',
